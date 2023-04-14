@@ -1,0 +1,20 @@
+{
+    "name": "hemker/random-string",
+    "description": "Creation of random strings (e.g. for coupon codes in webshops, hashes for one-time links/passwords, accound codes, etc. pp.)",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Hemker\\RandomString\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kevin Hemker"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "ext-bcmath": "*"
+    }
+}
