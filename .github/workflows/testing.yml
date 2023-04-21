@@ -1,0 +1,72 @@
+name: Run unit tests and ensures style guide
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths-ignore:
+      - 'README.md'
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths-ignore:
+      - 'README.md'
+
+jobs:
+
+  install-tools:
+    name: "Install PHP tools"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Cache tools installed with PHIVE"
+        uses: "actions/cache@v2.1.2"
+        with:
+          path: "${{ runner.temp }}/tools/*.phar"
+          key: "php-phive-${{ hashFiles('.phive/phars.xml') }}"
+          restore-keys: "php-phive-"
+
+      - name: "Install PHP tools with PHIVE"
+        run: "php phive.phar --no-progress install --trust-gpg-keys CBB3D576F2A0946F,4AA394086372C20A,E82B2FB314E9906E"
+
+  coding-guidelines:
+    name: Check Coding Guidelines
+    runs-on: ubuntu-latest
+    needs: install-tools
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          extensions: bcmath
+          coverage: none
+          tools: none
+
+      - name: Run PHP-CS-Fixer
+        run: php ./tools/php-cs-fixer.phar fix --dry-run --stop-on-violation --using-cache=no
+
+  testing:
+    name: Testing with PHP ${{ matrix.php-version }}
+    runs_on: ubuntu-latest
+    needs: install-tools
+    strategy:
+      matrix:
+        php-version: ['8.0', '8.1', '8.2']
+    steps:
+      - name: "Checkout code"
+        uses: "actions/checkout@v3"
+
+      - name: "Setup PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: bcmath
+
+      - name: "Install composer dependencies"
+        run: "php ./tools.composer.phar install --no-progress --optimize-autoloader"
+
+      - name: "Run phpunit tests"
+        run: "php ./tools/phpunit.phar"
