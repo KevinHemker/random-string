@@ -83,7 +83,7 @@ jobs:
           restore-keys: "php-phive-"
 
       - name: "Install composer dependencies"
-        run: "php ./tools.composer.phar install --no-progress --optimize-autoloader"
+        run: "php ./tools/composer.phar install --no-progress --optimize-autoloader"
 
       - name: "Run phpunit tests"
         run: "php ./tools/phpunit.phar"
