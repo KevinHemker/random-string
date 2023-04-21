@@ -50,7 +50,7 @@ jobs:
 
   testing:
     name: Testing with PHP ${{ matrix.php-version }}
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     needs: install-tools
     strategy:
       matrix:
