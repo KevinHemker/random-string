@@ -25,7 +25,7 @@ jobs:
       - name: "Cache tools installed with PHIVE"
         uses: "actions/cache@v2"
         with:
-          path: "${{ runner.temp }}/tools/*.phar"
+          path: tools/*.phar
           key: "php-phive-${{ hashFiles('.phive/phars.xml') }}"
           restore-keys: "php-phive-"
 
@@ -51,7 +51,7 @@ jobs:
       - name: "Get PHIVE tools from Cache"
         uses: "actions/cache@v2"
         with:
-          path: "${{ runner.temp }}/tools/*.phar"
+          path: tools/*.phar
           key: "php-phive-${{ hashFiles('.phive/phars.xml') }}"
           restore-keys: "php-phive-"
 
@@ -78,7 +78,7 @@ jobs:
       - name: "Get PHIVE tools from Cache"
         uses: "actions/cache@v2"
         with:
-          path: "${{ runner.temp }}/tools/*.phar"
+          path: /tools/*.phar
           key: "php-phive-${{ hashFiles('.phive/phars.xml') }}"
           restore-keys: "php-phive-"
 
