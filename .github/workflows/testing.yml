@@ -20,14 +20,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Cache tools installed with PHIVE"
-        uses: "actions/cache@v2.1.2"
+        uses: "actions/cache@v2"
         with:
           path: "${{ runner.temp }}/tools/*.phar"
           key: "php-phive-${{ hashFiles('.phive/phars.xml') }}"
           restore-keys: "php-phive-"
 
       - name: "Install PHP tools with PHIVE"
-        run: "php phive.phar --no-progress install --trust-gpg-keys CBB3D576F2A0946F,4AA394086372C20A,E82B2FB314E9906E"
+        run: "php ./phive.phar --no-progress install --trust-gpg-keys CBB3D576F2A0946F,4AA394086372C20A,E82B2FB314E9906E"
 
   coding-guidelines:
     name: Check Coding Guidelines
