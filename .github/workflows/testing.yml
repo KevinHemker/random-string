@@ -82,6 +82,17 @@ jobs:
           key: "php-phive-${{ hashFiles('.phive/phars.xml') }}"
           restore-keys: "php-phive-"
 
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: PHP-${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: |
+            PHP-${{ matrix.php-version }}-composer-
+
       - name: "Install composer dependencies"
         run: "php ./tools/composer.phar install --no-progress --optimize-autoloader"
 
