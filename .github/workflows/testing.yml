@@ -48,6 +48,13 @@ jobs:
           coverage: none
           tools: none
 
+      - name: "Get PHIVE tools from Cache"
+        uses: "actions/cache@v2"
+        with:
+          path: "${{ runner.temp }}/tools/*.phar"
+          key: "php-phive-${{ hashFiles('.phive/phars.xml') }}"
+          restore-keys: "php-phive-"
+
       - name: Run PHP-CS-Fixer
         run: php ./tools/php-cs-fixer.phar fix --dry-run --stop-on-violation --using-cache=no
 
@@ -67,6 +74,13 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           extensions: bcmath
+
+      - name: "Get PHIVE tools from Cache"
+        uses: "actions/cache@v2"
+        with:
+          path: "${{ runner.temp }}/tools/*.phar"
+          key: "php-phive-${{ hashFiles('.phive/phars.xml') }}"
+          restore-keys: "php-phive-"
 
       - name: "Install composer dependencies"
         run: "php ./tools.composer.phar install --no-progress --optimize-autoloader"
