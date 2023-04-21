@@ -19,6 +19,9 @@ jobs:
     name: "Install PHP tools"
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: "Cache tools installed with PHIVE"
         uses: "actions/cache@v2"
         with:
