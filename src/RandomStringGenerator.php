@@ -2,14 +2,20 @@
 
 namespace Hemker\RandomString;
 
+use Hemker\RandomString\Exception\InvalidArgumentException;
+
 class RandomStringGenerator
 {
     private const HASH_CHARACTERS = '123456789ABCDEFGHJKLMNPQRSTUVWXYZ';
 
-    private int $length;
+    private int $length = 1;
 
     public function length(int $length): self
     {
+        if ($length <= 0) {
+            throw new InvalidArgumentException('Only positive integers are allowed ('.$length.' given).');
+        }
+
         $this->length = $length;
 
         return $this;
