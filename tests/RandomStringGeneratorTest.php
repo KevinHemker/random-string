@@ -10,6 +10,13 @@ use PHPUnit\Framework\TestCase;
  */
 class RandomStringGeneratorTest extends TestCase
 {
+    public function testNoLengthGivenWillResultInLengthOne()
+    {
+        $generator = new RandomStringGenerator();
+        $string = $generator->create();
+        $this->assertSame(1, strlen($string));
+    }
+
     /**
      * @dataProvider validLengthProvider
      */
