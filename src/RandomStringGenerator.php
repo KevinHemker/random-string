@@ -9,6 +9,7 @@ class RandomStringGenerator
     private const HASH_CHARACTERS = '123456789ABCDEFGHJKLMNPQRSTUVWXYZ';
 
     private int $length = 1;
+    private string $chars = self::HASH_CHARACTERS;
 
     public function length(int $length): self
     {
@@ -17,6 +18,13 @@ class RandomStringGenerator
         }
 
         $this->length = $length;
+
+        return $this;
+    }
+
+    public function chars(string $preset): self
+    {
+        $this->chars = $preset;
 
         return $this;
     }
@@ -40,16 +48,16 @@ class RandomStringGenerator
     private function encodeToValidCharacters($input): string
     {
         $input = str_replace(['a', 'b', 'c', 'd', 'e', 'f'], ['10', '11', '12', '13', '14', '15'], md5($input));
-        $base_count = strval(strlen(self::HASH_CHARACTERS));
+        $base_count = strval(strlen($this->chars));
         $encoded = '';
         while (floatval($input) >= floatval($base_count)) {
             $div = bcdiv($input, $base_count);
             $mod = bcmod($input, $base_count);
-            $encoded = substr(self::HASH_CHARACTERS, intval($mod), 1).$encoded;
+            $encoded = substr($this->chars, intval($mod), 1).$encoded;
             $input = $div;
         }
         if (floatval($input) > 0) {
-            $encoded = substr(self::HASH_CHARACTERS, intval($input), 1).$encoded;
+            $encoded = substr($this->chars, intval($input), 1).$encoded;
         }
 
         return $encoded;

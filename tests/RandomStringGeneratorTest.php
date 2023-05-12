@@ -40,6 +40,23 @@ class RandomStringGeneratorTest extends TestCase
         $generator->length($length)->create();
     }
 
+    public function testResultWillOnlyContainGivenChars()
+    {
+        $preset = 'asdf';
+        $generator = new RandomStringGenerator();
+        $string = $generator->length(50)->chars($preset)->create();
+
+        $validChars = str_split($preset);
+        $onlyValidCharsGiven = true;
+        foreach (str_split($string) as $char) {
+            if (!in_array($char, $validChars)) {
+                $onlyValidCharsGiven = false;
+            }
+        }
+
+        $this->assertTrue($onlyValidCharsGiven, sprintf('Generated string contains other chars than defined! (generated: %s, allowed chars: %s)', $string, $preset));
+    }
+
     /**
      * @return int[][] First: Expected Length, then: Param to length()
      */
