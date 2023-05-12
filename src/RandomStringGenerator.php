@@ -8,8 +8,14 @@ class RandomStringGenerator
 {
     private const HASH_CHARACTERS = '123456789ABCDEFGHJKLMNPQRSTUVWXYZ';
 
-    private int $length = 1;
+    private int $length;
     private string $chars = self::HASH_CHARACTERS;
+
+    public function __construct(string $chars = self::HASH_CHARACTERS, int $length = 1)
+    {
+        $this->chars($chars);
+        $this->length($length);
+    }
 
     public function length(int $length): self
     {
