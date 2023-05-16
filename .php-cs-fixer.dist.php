@@ -13,7 +13,7 @@ $finder = Finder::create()
 $config = new Config();
 $config
     ->setFinder($finder)
-    ->setCacheFile(__DIR__.'/.build/php-cs-fixer/php_cs.cache')
+    ->setCacheFile(__DIR__.'/.build/cache/php_cs.cache')
     ->setRules([
         '@Symfony' => true,
         'yoda_style' => false,
