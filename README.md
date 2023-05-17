@@ -4,5 +4,7 @@
 ![PHP-Versions](https://img.shields.io/badge/PHP-8.0%20--%208.2-blue)
 ![Tests](https://img.shields.io/github/actions/workflow/status/KevinHemker/random-string/testing.yml?branch=develop&label=tests)
 [![codecov](https://codecov.io/github/KevinHemker/random-string/branch/develop/graph/badge.svg?token=XAI5WPQFHH)](https://codecov.io/github/KevinHemker/random-string)
+![Type-Coverage](https://shepherd.dev/github/KevinHemker/random-string/coverage.svg)
+![Psalm-Level](https://shepherd.dev/github/KevinHemker/random-string/level.svg)
 
 Creation of random strings (e.g. for coupon codes in webshops, hashes for one-time links/passwords, account codes, etc. pp.)
