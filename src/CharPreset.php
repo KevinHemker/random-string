@@ -2,6 +2,9 @@
 
 namespace Hemker\RandomString;
 
+/**
+ * @api
+ */
 class CharPreset
 {
     /** @var string [0-9] */

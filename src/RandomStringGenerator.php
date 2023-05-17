@@ -4,11 +4,14 @@ namespace Hemker\RandomString;
 
 use Hemker\RandomString\Exception\InvalidArgumentException;
 
+/**
+ * @api
+ */
 class RandomStringGenerator
 {
     private const HASH_CHARACTERS = '123456789ABCDEFGHJKLMNPQRSTUVWXYZ';
 
-    private int $length;
+    private int $length = 1;
     private string $chars = self::HASH_CHARACTERS;
 
     public function __construct(string $chars = self::HASH_CHARACTERS, int $length = 1)
@@ -51,9 +54,11 @@ class RandomStringGenerator
         return substr(str_shuffle(str_repeat(implode('', range('!', 'z')), 20)), 0, 20);
     }
 
-    private function encodeToValidCharacters($input): string
+    private function encodeToValidCharacters(string $input): string
     {
+        /** @psalm-var numeric-string $input */
         $input = str_replace(['a', 'b', 'c', 'd', 'e', 'f'], ['10', '11', '12', '13', '14', '15'], md5($input));
+        /** @psalm-var numeric-string $base_count */
         $base_count = strval(strlen($this->chars));
         $encoded = '';
         while (floatval($input) >= floatval($base_count)) {
