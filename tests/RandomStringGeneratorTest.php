@@ -46,15 +46,37 @@ class RandomStringGeneratorTest extends TestCase
         $generator = new RandomStringGenerator();
         $string = $generator->length(50)->chars($preset)->create();
 
-        $validChars = str_split($preset);
-        $onlyValidCharsGiven = true;
-        foreach (str_split($string) as $char) {
+        $this->assertTrue($this->onlyValidCharsUsed($preset, $string), sprintf('Generated string contains other chars than defined! (generated: %s, allowed chars: %s)', $string, $preset));
+    }
+
+    /**
+     * @dataProvider validLengthProvider
+     */
+    public function testMultipleStringsCanBeCreatedAtOnce(int $expectedLength, int $length)
+    {
+        $preset = '1234567890';
+        $generator = new RandomStringGenerator($preset, 5);
+        $strings = $generator->create($length);
+
+        $this->assertIsArray($strings);
+        $this->assertSame($expectedLength, count($strings));
+
+        foreach ($strings as $string) {
+            $this->assertSame(5, strlen($string));
+            $this->assertTrue($this->onlyValidCharsUsed($preset, $string));
+        }
+    }
+
+    private function onlyValidCharsUsed(string $validChars, string $stringToTest): bool
+    {
+        $validChars = str_split($validChars);
+        foreach (str_split($stringToTest) as $char) {
             if (!in_array($char, $validChars)) {
-                $onlyValidCharsGiven = false;
+                return false;
             }
         }
 
-        $this->assertTrue($onlyValidCharsGiven, sprintf('Generated string contains other chars than defined! (generated: %s, allowed chars: %s)', $string, $preset));
+        return true;
     }
 
     /**

@@ -38,15 +38,23 @@ class RandomStringGenerator
         return $this;
     }
 
-    public function create(): string
+    public function create(int $count = 1): string|array
     {
-        $result = '';
-        do {
-            $randomString = $this->createRandomString();
-            $result .= $this->encodeToValidCharacters($randomString);
-        } while (strlen($result) < $this->length);
+        if ($count <= 0) {
+            throw new InvalidArgumentException('Only positive integers are allowed ('.$count.' given).');
+        }
 
-        return substr($result, -$this->length);
+        $result = [];
+        do {
+            $string = '';
+            do {
+                $randomString = $this->createRandomString();
+                $string .= $this->encodeToValidCharacters($randomString);
+            } while (strlen($string) < $this->length);
+            $result[] = substr($string, -$this->length);
+        } while (count($result) < $count);
+
+        return $count == 1 ? $result[0] : $result;
     }
 
     private function createRandomString(): string
