@@ -77,7 +77,10 @@ You'd like to see a feature? Or you found a bug? Awesome! Open source is fueled 
 
 You're a programmer? Perfect. Pull requests are appreciated! Note this hints:
 
-  - This project uses some tools to ensure code quality. You can install them by running `phive.phar install`. This will download all needed phars to `./tools`
-  - run ` ./tools/php-cs-fixer.phar fix` to ensure code style
-  - run `./tools/psalm.phar` to check type coverage
-  - run `./tools/phpunit.phar` to run all unit tests
+  - This project uses some tools to ensure code quality (phpunit, php-cs-fixer, psalm).
+    - run `./phive.phar install` to download all needed phars to `./tools`
+    - run `./tools/composer.phar --run-script check-all` before pushing code
+ 
+  
+> **Note**
+> See `composer.json` (section scripts) for all available commands
