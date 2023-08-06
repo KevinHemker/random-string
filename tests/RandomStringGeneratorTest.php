@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/**
+ * @copyright Kevin Hemker <kevin@hemkers.de>
+ * @license   MIT
+ * @see       https://github.com/KevinHemker/random-string
+ */
+
 use Hemker\RandomString\RandomStringGenerator;
 use PHPUnit\Framework\TestCase;
 

@@ -10,7 +10,8 @@
     },
     "authors": [
         {
-            "name": "Kevin Hemker"
+            "name": "Kevin Hemker",
+            "email": "kevin@hemkers.de"
         }
     ],
     "require": {
@@ -26,6 +27,6 @@
         "check-style": "@php ./tools/php-cs-fixer.phar fix --dry-run --stop-on-violation",
         "fix-style": "@php ./tools/php-cs-fixer.phar fix",
         "unittests": "@php ./tools/phpunit.phar --no-coverage",
-        "psalm": "@php ./tools/psalm.phar"
+        "psalm": "@php ./tools/psalm.phar --no-cache"
     }
 }

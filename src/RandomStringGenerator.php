@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/**
+ * @copyright Kevin Hemker <kevin@hemkers.de>
+ * @license   MIT
+ * @see       https://github.com/KevinHemker/random-string
+ */
+
 namespace Hemker\RandomString;
 
 use Hemker\RandomString\Exception\InvalidArgumentException;

@@ -1,7 +1,7 @@
 <?php
 
-use PhpCsFixer\Finder;
 use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
 
 $finder = Finder::create()
     ->in([__DIR__.'/src', __DIR__.'/tests'])
@@ -19,6 +19,10 @@ $config
         '@Symfony' => true,
         'yoda_style' => false,
         'declare_strict_types' => true,
+        'header_comment' => [
+            'comment_type' => 'PHPDoc',
+            'header' => "@copyright Kevin Hemker <kevin@hemkers.de>\n@license   MIT\n@see       https://github.com/KevinHemker/random-string",
+        ],
     ])
 ;
 
