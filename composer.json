@@ -1,0 +1,32 @@
+{
+    "name": "hemker/random-string",
+    "description": "Creation of random strings (e.g. for coupon codes in webshops, hashes for one-time links/passwords, accound codes, etc. pp.)",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Hemker\\RandomString\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kevin Hemker",
+            "email": "kevin@hemkers.de"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "ext-bcmath": "*"
+    },
+    "scripts": {
+        "check-all" : [
+            "@check-style",
+            "@unittests",
+            "@psalm"
+        ],
+        "check-style": "@php ./tools/php-cs-fixer.phar fix --dry-run --stop-on-violation",
+        "fix-style": "@php ./tools/php-cs-fixer.phar fix",
+        "unittests": "@php ./tools/phpunit.phar --no-coverage",
+        "psalm": "@php ./tools/psalm.phar --no-cache"
+    }
+}
