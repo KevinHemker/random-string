@@ -24,7 +24,7 @@
             "@psalm"
         ],
         "check-style": "@php ./tools/php-cs-fixer.phar fix --dry-run --stop-on-violation",
-        "fix-style": "@php ./tools.php-cs-fixer.phar fix",
+        "fix-style": "@php ./tools/php-cs-fixer.phar fix",
         "unittests": "@php ./tools/phpunit.phar --no-coverage",
         "psalm": "@php ./tools/psalm.phar"
     }
